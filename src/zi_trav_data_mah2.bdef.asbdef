@@ -1,0 +1,15 @@
+managed implementation in class zbp_i_trav_data_mah2 unique;
+strict ( 2 );
+
+define behavior for ZI_TRAV_DATA_MAH2 alias Travel2
+persistent table ztrav_data_mah
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+
+  field ( mandatory : create, readonly : update ) mykey;
+  create;
+  update;
+  delete;
+}

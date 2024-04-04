@@ -1,0 +1,9 @@
+projection;
+strict ( 2 );
+
+define behavior for ZC_TRAV_DATA_MAH2 alias TravelProcessor2
+{
+  use create;
+  use update;
+  use delete;
+}
