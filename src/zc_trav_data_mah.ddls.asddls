@@ -8,6 +8,11 @@ headerInfo: { typeName: 'Travel', typeNamePlural: 'Travels', title: { type: #STA
 
 @Search.searchable: true
 
+@Metadata.allowExtensions:true
+
+@ObjectModel.semanticKey: ['TravelID']
+@ObjectModel.resultSet.sizeCategory: #XS -- drop down menu for value help
+
 define root view entity ZC_TRAV_DATA_MAH
 
 provider contract transactional_query
@@ -16,81 +21,34 @@ as projection on ZI_TRAV_DATA_MAH
 
 {
 
-@UI.facet: [ { id: 'Travel',
-
-purpose: #STANDARD,
-
-type: #IDENTIFICATION_REFERENCE,
-
-label: 'Travel',
-
-position: 10 } ]
 
 @UI.hidden: true
 
 key mykey as TravelUUID,
 
-@UI: {
-
-lineItem: [ { position: 10, importance: #HIGH } ],
-
-identification: [ { position: 10, label: 'Travel ID [1,...,99999999]' } ] }
-
-@Search.defaultSearchElement: true
-
+@EndUserText.label: 'Travel'
+@ObjectModel.text.element:  [ 'Description' ]
 travel_id as TravelID,
 
-@UI: {
 
-lineItem: [ { position: 20, importance: #HIGH } ],
-
-identification: [ { position: 20 } ],
-
-selectionField: [ { position: 20 } ] }
-
-@Consumption.valueHelpDefinition: [{ entity : {name: '/DMO/I_Agency', element: 'AgencyID' } }]
-
-@ObjectModel.text.element: ['AgencyName'] ----meaning?
-
-@Search.defaultSearchElement: true
-
+@EndUserText.label: 'Agency'
+@ObjectModel.text.element: ['AgencyName']
 agency_id as AgencyID,
-
 _Agency.Name as AgencyName,
 
-@UI: {
 
-lineItem: [ { position: 30, importance: #HIGH } ],
-
-identification: [ { position: 30 } ],
-
-selectionField: [ { position: 30 } ] }
-
-@Consumption.valueHelpDefinition: [{ entity : {name: '/DMO/I_Customer', element: 'CustomerID' } }]
-
-@ObjectModel.text.element: ['CustomerName']
-
-@Search.defaultSearchElement: true
 
 customer_id as CustomerID,
 
-@UI.hidden: true
+
 
 _Customer.LastName as CustomerName,
 
-@UI: {
 
-lineItem: [ { position: 40, importance: #MEDIUM } ],
-
-identification: [ { position: 40 } ] }
 
 begin_date as BeginDate,
 
-@UI: {
 
-lineItem: [ { position: 41, importance: #MEDIUM } ],
-
-identification: [ { position: 41 } ] }
 
 end_date as EndDate,
 

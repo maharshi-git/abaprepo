@@ -1,0 +1,105 @@
+@Metadata.layer: #CORE
+
+
+@UI: {
+    headerInfo: {
+        typeName: 'Travel',
+        typeNamePlural: 'Travels',
+        title: {
+            type: #STANDARD, value: 'Description'
+        },
+        description: {
+            value: 'TravelID'
+        }
+    },
+    presentationVariant: [{
+        sortOrder: [{
+            by: 'LastChangedAt',
+            direction: #DESC
+        }],
+        visualizations: [{
+            type: #AS_LINEITEM
+        }]
+    }]
+}
+
+
+annotate view ZC_TRAV_DATA_MAH with
+
+
+{
+
+  @UI.facet: [
+        {
+            id: 'TravelHeaderPrice',
+            purpose: #HEADER,
+            type: #DATAPOINT_REFERENCE,
+            position: 10,
+            targetQualifier: 'PriceData'
+        },
+        {
+            id: 'TravelHeaderOverallStatus',
+            purpose: #HEADER,
+            type: #DATAPOINT_REFERENCE,
+            position: 20,
+            targetQualifier: 'StatusData'
+         },
+         {
+              label: 'General Information',
+              id: 'GeneralInfo',
+              type: #COLLECTION,
+              position: 10
+        },
+        {
+              label: 'General',
+              id: 'Travel',
+              type: #IDENTIFICATION_REFERENCE,
+              purpose: #STANDARD,
+              parentId: 'GeneralInfo',
+              position: 10
+        }
+    ]
+
+
+  @UI.lineItem: [{ position: 10 }]
+  @UI.dataPoint: { qualifier: 'PriceData', title: 'Total Price'}
+  TravelID;
+
+  @UI.lineItem: [{ position: 20 }]
+  @UI.selectionField: [{ position: 20 }]
+  @Consumption.valueHelpDefinition: [{ entity: {name: '/DMO/I_Agency', element: 'AgencyID' } }]
+  @UI.dataPoint: { qualifier: 'StatusData', title: 'Total Price'}
+  @UI.identification: [{ position: 30 }]
+  AgencyID;
+  
+  @UI.identification: [{ position: 10 }]
+  Description;
+  
+
+  @UI.lineItem: [{ position: 30 }]
+  @UI.selectionField: [{ position: 30 }]
+  @UI.identification: [{ position: 20 }]
+  CustomerID;
+
+  @UI.lineItem: [{ position: 40 }]
+  @UI.selectionField: [{ position: 40 }]
+  BeginDate;
+
+  @UI.dataPoint: { qualifier: 'Facet1', title: 'Total Price'}
+  AgencyName;
+
+  @UI.lineItem: [{ position: 50 }]
+  @UI.selectionField: [{ position: 50 }]
+  EndDate;
+
+  @UI.lineItem: [{ position: 60 }]
+  @UI.selectionField: [{ position: 60 }]
+  TravelStatus;
+
+  @UI.lineItem: [{ position: 70 }]
+  TotalPrice;
+
+
+
+
+}

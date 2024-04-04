@@ -2,6 +2,8 @@
 
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 
+@Metadata.allowExtensions:true
+
 define root view entity ZI_TRAV_DATA_MAH
 
 as select from ztrav_data_mah as Travel
